@@ -1,0 +1,421 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ===== Global Base Styles ===== */
+body {
+  font-family: 'Poppins', sans-serif;
+  color: #666666;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: normal;
+  color: #111111;
+  line-height: normal;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  transition: all 0.3s ease-in-out;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ===== Loader ===== */
+.loader_bg {
+  position: fixed;
+  z-index: 9999;
+  background: #fff;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.5s ease;
+}
+.loader_bg.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ===== Carousel ===== */
+.carousel-container {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+.carousel-slide {
+  display: none;
+  position: relative;
+}
+.carousel-slide.active {
+  display: block;
+}
+.carousel-slide img {
+  width: 100%;
+  height: 600px;
+  object-fit: cover;
+}
+
+@media (max-width: 768px) {
+  .carousel-slide img {
+    height: 400px;
+  }
+}
+
+.carousel-caption {
+  position: absolute;
+  top: 50%;
+  left: 10%;
+  transform: translateY(-50%);
+  color: #fff;
+  z-index: 2;
+}
+.carousel-caption h1 {
+  font-size: 48px;
+  font-weight: 300;
+  color: #fff;
+  line-height: 1.2;
+  margin-bottom: 10px;
+}
+.carousel-caption h1 .black-bold {
+  font-weight: 700;
+  color: #111;
+}
+.carousel-caption h1 .yellow-bold {
+  font-weight: 700;
+  color: #f5b731;
+}
+.carousel-caption p {
+  font-size: 16px;
+  color: #fff;
+  margin-bottom: 20px;
+}
+.carousel-caption .btn-cta {
+  display: inline-block;
+  background: #f5b731;
+  color: #111;
+  padding: 12px 32px;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 4px;
+  transition: all 0.3s;
+  text-decoration: none;
+}
+.carousel-caption .btn-cta:hover {
+  background: #e5a520;
+  color: #fff;
+}
+
+.carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 3;
+  width: 50px;
+  height: 50px;
+  background: rgba(0,0,0,0.4);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s;
+}
+.carousel-arrow:hover {
+  background: rgba(0,0,0,0.7);
+}
+.carousel-arrow.prev { left: 20px; }
+.carousel-arrow.next { right: 20px; }
+
+/* ===== Section Title ===== */
+.section-title h2 {
+  font-size: 32px;
+  font-weight: 300;
+  color: #111;
+  text-transform: capitalize;
+  padding: 0;
+}
+.section-title h2 strong {
+  font-weight: 700;
+}
+.section-title span {
+  font-size: 15px;
+  color: #666;
+  display: block;
+  margin-top: 8px;
+}
+
+/* ===== Page Banner ===== */
+.page-banner {
+  background: linear-gradient(135deg, #1a74b3, #114c7d);
+  padding: 60px 0;
+  text-align: center;
+}
+.page-banner h2 {
+  font-size: 36px;
+  font-weight: 600;
+  color: #fff;
+  text-transform: capitalize;
+  padding: 0;
+}
+
+/* ===== Feature / Choose Us Card ===== */
+.feature-card {
+  text-align: center;
+  padding: 30px 20px;
+  transition: all 0.3s ease;
+  border-radius: 8px;
+}
+.feature-card:hover {
+  box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+  transform: translateY(-5px);
+}
+.feature-card img {
+  width: 70px;
+  margin-bottom: 20px;
+}
+.feature-card h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  padding: 0;
+}
+.feature-card p {
+  font-size: 14px;
+  line-height: 22px;
+}
+
+/* ===== Service Card ===== */
+.service-card {
+  text-align: center;
+  padding: 30px 20px;
+  background: #fff;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+.service-card:hover {
+  box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+  transform: translateY(-5px);
+}
+.service-card img {
+  width: 60px;
+  margin-bottom: 20px;
+}
+.service-card h3 {
+  font-size: 17px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  padding: 0;
+}
+.service-card p {
+  font-size: 14px;
+  line-height: 22px;
+}
+
+/* ===== Product Card ===== */
+.product-card {
+  text-align: center;
+  padding: 20px;
+  background: #fff;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  border: 1px solid #f0f0f0;
+}
+.product-card:hover {
+  box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+  transform: translateY(-5px);
+}
+.product-card img {
+  width: 100%;
+  max-width: 180px;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-bottom: 15px;
+}
+.product-card h3 {
+  font-size: 17px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  padding: 0;
+}
+.product-card span {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1a74b3;
+}
+
+/* ===== Testimonial ===== */
+.testimonial-card {
+  text-align: center;
+  padding: 40px 30px;
+}
+.testimonial-card img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+.testimonial-card .name {
+  font-weight: 600;
+  color: #111;
+  font-size: 16px;
+}
+.testimonial-card .date {
+  font-size: 13px;
+  color: #999;
+}
+.testimonial-card p {
+  margin-top: 15px;
+  font-size: 15px;
+  line-height: 26px;
+  color: #555;
+}
+
+/* ===== Quote Banner ===== */
+.quote-banner {
+  background: #f5b731;
+  padding: 40px 0;
+}
+.quote-banner h3 {
+  font-size: 22px;
+  font-weight: 600;
+  color: #111;
+  padding: 0;
+}
+.quote-banner p {
+  color: #333;
+  margin-top: 5px;
+}
+.quote-banner .btn-quote {
+  display: inline-block;
+  background: #111;
+  color: #fff;
+  padding: 12px 40px;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 4px;
+  transition: all 0.3s;
+  text-decoration: none;
+}
+.quote-banner .btn-quote:hover {
+  background: #1a74b3;
+}
+
+/* ===== Contact Form ===== */
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 14px 18px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  transition: border 0.3s;
+  outline: none;
+}
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: #1a74b3;
+  box-shadow: 0 0 0 3px rgba(26, 116, 179, 0.1);
+}
+.contact-form textarea {
+  min-height: 150px;
+  resize: vertical;
+}
+.contact-form .btn-send {
+  background: #1a74b3;
+  color: #fff;
+  padding: 14px 50px;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.contact-form .btn-send:hover {
+  background: #114c7d;
+}
+
+/* ===== Blog Card ===== */
+.blog-card {
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  border: 1px solid #f0f0f0;
+}
+.blog-card:hover {
+  box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+  transform: translateY(-5px);
+}
+.blog-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+.blog-card .blog-content {
+  padding: 20px;
+}
+.blog-card h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  padding: 0;
+}
+.blog-card .blog-meta span {
+  font-size: 13px;
+  color: #999;
+  margin-right: 15px;
+}
+.blog-card p {
+  font-size: 14px;
+  line-height: 22px;
+  margin-top: 10px;
+  color: #666;
+}
+
+/* ===== About Section ===== */
+.about-img img {
+  border-radius: 10px;
+  width: 100%;
+}
+.about-text h3 {
+  font-size: 26px;
+  font-weight: 600;
+  margin-bottom: 15px;
+  padding: 0;
+}
+.about-text p {
+  font-size: 15px;
+  line-height: 26px;
+  margin-bottom: 12px;
+}
+
+/* ===== Read More Button ===== */
+.btn-readmore {
+  display: inline-block;
+  background: #1a74b3;
+  color: #fff;
+  padding: 12px 40px;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 4px;
+  transition: all 0.3s;
+  text-decoration: none;
+}
+.btn-readmore:hover {
+  background: #114c7d;
+  color: #fff;
+}
