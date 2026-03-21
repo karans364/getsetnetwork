@@ -34,7 +34,7 @@ export default defineEventHandler(async (event) => {
       
     if (error) {
       console.error('Supabase storage upload error:', error)
-      throw createError({ statusCode: 500, statusMessage: 'Error uploading image to storage' })
+      throw createError({ statusCode: 500, statusMessage: `Supabase Error: ${error.message || JSON.stringify(error)}` })
     }
     
     // Get the public URL
@@ -51,7 +51,7 @@ export default defineEventHandler(async (event) => {
     console.error('File upload error:', error)
     throw createError({
       statusCode: error.statusCode || 500,
-      statusMessage: error.statusMessage || 'Error uploading file',
+      statusMessage: `Caught Error: ${error.message || error.statusMessage || JSON.stringify(error)}`
     })
   }
 })
