@@ -1,4 +1,4 @@
-import { writeFile } from 'fs/promises'
+import { supabase } from '../../utils/supabase'
 import path from 'path'
 import { randomUUID } from 'crypto'
 
@@ -7,19 +7,13 @@ export default defineEventHandler(async (event) => {
     const formData = await readMultipartFormData(event)
     
     if (!formData || formData.length === 0) {
-      throw createError({
-        statusCode: 400,
-        statusMessage: 'No file uploaded',
-      })
+      throw createError({ statusCode: 400, statusMessage: 'No file uploaded' })
     }
 
     const file = formData.find((item) => item.name === 'file')
     
     if (!file || !file.data) {
-      throw createError({
-        statusCode: 400,
-        statusMessage: 'Invalid file format',
-      })
+      throw createError({ statusCode: 400, statusMessage: 'Invalid file format' })
     }
     
     // Get original filename extension
@@ -27,16 +21,28 @@ export default defineEventHandler(async (event) => {
     const extension = path.extname(originalFilename) || '.jpg'
     const uniqueFilename = `${randomUUID()}${extension}`
     
-    // Save to public directory
-    const uploadDir = path.join(process.cwd(), 'public', 'uploads')
-    const filePath = path.join(uploadDir, uniqueFilename)
+    // Upload to Supabase Storage bucket named 'products'
+    const { data, error } = await supabase.storage
+      .from('products')
+      .upload(uniqueFilename, file.data, {
+        contentType: file.type || 'image/jpeg',
+        cacheControl: '3600',
+        upsert: false
+      })
+      
+    if (error) {
+      console.error('Supabase storage upload error:', error)
+      throw createError({ statusCode: 500, statusMessage: 'Error uploading image to storage' })
+    }
     
-    // file.data is a Buffer in H3 readMultipartFormData
-    await writeFile(filePath, file.data)
-    
+    // Get the public URL
+    const { data: urlData } = supabase.storage
+      .from('products')
+      .getPublicUrl(data.path)
+      
     return {
       success: true,
-      url: `/uploads/${uniqueFilename}`
+      url: urlData.publicUrl
     }
     
   } catch (error: any) {
