@@ -1,6 +1,5 @@
-import { supabase } from '../../utils/supabase'
-import path from 'path'
-import { randomUUID } from 'crypto'
+import { supabase } from '../utils/supabase'
+import path from 'node:path'
 
 export default defineEventHandler(async (event) => {
   try {
@@ -19,7 +18,7 @@ export default defineEventHandler(async (event) => {
     // Get original filename extension
     const originalFilename = file.filename || 'uploaded_image'
     const extension = path.extname(originalFilename) || '.jpg'
-    const uniqueFilename = `${randomUUID()}${extension}`
+    const uniqueFilename = `${crypto.randomUUID()}${extension}`
     
     // Convert Buffer to Web-standard Blob for Vercel/Node-fetch compatibility
     const fileBlob = new Blob([new Uint8Array(file.data)], { type: file.type || 'image/jpeg' })

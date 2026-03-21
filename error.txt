@@ -1,0 +1,7 @@
+{
+  "error": true,
+  "url": "https://www.getsetnetwork.com/api/upload",
+  "statusCode": 500,
+  "statusMessage": "Error uploading file",
+  "message": "Error uploading file"
+}

@@ -1,4 +1,4 @@
-import { supabase } from '../../../utils/supabase'
+import { supabase } from '../../utils/supabase'
 
 export default defineEventHandler(async (event) => {
   const id = getRouterParam(event, 'id')
