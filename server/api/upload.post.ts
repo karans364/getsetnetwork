@@ -21,11 +21,13 @@ export default defineEventHandler(async (event) => {
     const extension = path.extname(originalFilename) || '.jpg'
     const uniqueFilename = `${randomUUID()}${extension}`
     
+    // Convert Buffer to Web-standard Blob for Vercel/Node-fetch compatibility
+    const fileBlob = new Blob([new Uint8Array(file.data)], { type: file.type || 'image/jpeg' })
+    
     // Upload to Supabase Storage bucket named 'products'
     const { data, error } = await supabase.storage
       .from('products')
-      .upload(uniqueFilename, file.data, {
-        contentType: file.type || 'image/jpeg',
+      .upload(uniqueFilename, fileBlob, {
         cacheControl: '3600',
         upsert: false
       })
