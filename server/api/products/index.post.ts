@@ -1,22 +1,23 @@
+import { supabase } from '../../utils/supabase'
+
 export default defineEventHandler(async (event) => {
-  try {
-    const body = await readBody(event)
+  const body = await readBody(event)
+  
+  const { data: newProduct, error } = await supabase
+    .from('Product')
+    .insert([{
+      name: body.name,
+      price: body.price,
+      image: body.image,
+      description: body.description
+    }])
+    .select()
+    .single()
     
-    const product = await prisma.product.create({
-      data: {
-        name: body.name,
-        price: body.price,
-        image: body.image,
-        description: body.description || '',
-      },
-    })
-    
-    return product
-  } catch (error) {
-    console.error(error)
-    throw createError({
-      statusCode: 500,
-      statusMessage: 'Error creating product',
-    })
+  if (error) {
+    console.error('Supabase insert error:', error)
+    throw createError({ statusCode: 500, statusMessage: error.message })
   }
+  
+  return newProduct
 })
