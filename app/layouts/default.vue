@@ -5,78 +5,81 @@
       <img src="/images/loading.gif" alt="Loading..." class="w-52" />
     </div>
 
-    <!-- Top Bar -->
-    <div class="bg-dark text-white">
-      <div class="max-w-7xl mx-auto px-4 py-2 flex flex-col sm:flex-row justify-between items-center">
-        <ul class="flex gap-4">
-          <li><a href="#" class="text-white hover:text-accent transition"><i class="fa fa-facebook"></i></a></li>
-          <li><a href="#" class="text-white hover:text-accent transition"><i class="fa fa-twitter"></i></a></li>
-          <li><a href="#" class="text-white hover:text-accent transition"><i class="fa fa-instagram"></i></a></li>
-          <li><a href="#" class="text-white hover:text-accent transition"><i class="fa fa-linkedin"></i></a></li>
-        </ul>
-        <p class="text-sm mt-2 sm:mt-0">Email Id- Admin@getsetnetwork.com</p>
-      </div>
-    </div>
-
-    <!-- Navbar -->
-    <nav class="bg-white shadow-md sticky top-0 z-50">
-      <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
-        <NuxtLink to="/" class="flex-shrink-0">
-          <img src="/images/logo.jpg" alt="Get Set Network" class="w-28" />
+    <!-- Amazon-style Nav Header -->
+    <header class="w-full relative z-50">
+      <!-- Main Nav Tier -->
+      <div class="bg-gray-900 text-white flex items-center justify-between px-2 sm:px-4 py-2 gap-2 sm:gap-4">
+        <!-- Logo -->
+        <NuxtLink to="/" class="flex-shrink-0 flex items-center border border-transparent hover:border-gray-500 p-1 rounded transition">
+          <img src="/images/logo.jpg" alt="Get Set Network" class="w-20 sm:w-28 h-8 sm:h-10 object-contain bg-white rounded-sm" />
         </NuxtLink>
 
-        <!-- Cart & Mobile Toggle -->
-        <div class="flex items-center gap-4 lg:hidden">
-          <!-- Mobile Cart Button -->
-          <button @click="isCartOpen = true" class="relative text-dark hover:text-primary transition focus:outline-none flex items-center">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-            </svg>
-            <span v-if="cart.length > 0" class="absolute -top-2 -right-2 bg-red-500 text-white text-[10px] font-bold w-4 h-4 flex items-center justify-center rounded-full">
-              {{ cart.length }}
-            </span>
-          </button>
-          
-          <!-- Mobile Toggle -->
-          <button @click="mobileMenuOpen = !mobileMenuOpen" class="text-dark text-2xl focus:outline-none">
-            <i :class="mobileMenuOpen ? 'fa fa-times' : 'fa fa-bars'"></i>
+        <!-- Search Bar -->
+        <div class="hidden sm:flex flex-grow max-w-4xl rounded-md overflow-hidden bg-white focus-within:ring-2 focus-within:ring-[#f08804]">
+          <select class="bg-gray-100 text-gray-700 text-xs sm:text-sm px-2 sm:px-3 border-r outline-none cursor-pointer hover:bg-gray-200">
+            <option>All Categories</option>
+            <option>Electronics</option>
+            <option>Computers</option>
+            <option>Mobiles</option>
+          </select>
+          <input type="text" placeholder="Search Getsetnetwork..." class="w-full px-4 py-2.5 text-black outline-none text-sm" />
+          <button class="bg-[#febd69] hover:bg-[#f3a847] px-5 text-gray-900 flex items-center justify-center transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
           </button>
         </div>
 
-        <!-- Menu -->
-        <ul
-          :class="[
-            'lg:flex lg:items-center lg:gap-8 font-medium text-[15px]',
-            mobileMenuOpen
-              ? 'flex flex-col absolute top-full left-0 w-full bg-white shadow-lg px-6 py-4 gap-4 z-40'
-              : 'hidden'
-          ]"
-        >
-          <li v-for="item in menuItems" :key="item.to">
-            <NuxtLink
-              :to="item.to"
-              class="text-dark hover:text-primary transition"
-              active-class="!text-primary font-semibold"
-              @click="mobileMenuOpen = false"
-            >
-              {{ item.label }}
-            </NuxtLink>
-          </li>
+        <!-- Right Side Links -->
+        <div class="flex items-center gap-1 sm:gap-2">
+          <NuxtLink to="/login" class="flex flex-col border border-transparent hover:border-gray-500 p-2 rounded cursor-pointer leading-tight transition">
+            <span class="text-[10px] sm:text-[11px] text-gray-300">Hello, sign in</span>
+            <span class="text-sm font-bold hidden sm:block">Account & Lists</span>
+          </NuxtLink>
           
-          <!-- Desktop Cart Button -->
-          <li class="hidden lg:block ml-4">
-            <button @click="isCartOpen = true" class="relative text-dark hover:text-primary transition focus:outline-none flex items-center cursor-pointer">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <div class="hidden md:flex flex-col border border-transparent hover:border-gray-500 p-2 rounded cursor-pointer leading-tight transition">
+            <span class="text-[11px] text-gray-300">Returns</span>
+            <span class="text-sm font-bold">& Orders</span>
+          </div>
+
+          <!-- Cart Button -->
+          <button @click="isCartOpen = true" class="relative flex items-end border border-transparent hover:border-gray-500 p-2 rounded cursor-pointer transition">
+            <div class="relative">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
               </svg>
-              <span v-if="cart.length > 0" class="absolute -top-2 -right-2 bg-red-500 text-white text-[10px] font-bold w-4 h-4 flex items-center justify-center rounded-full">
+              <span class="absolute top-0 left-[18px] -mt-1 text-[#f08804] font-bold text-[15px]">
                 {{ cart.length }}
               </span>
-            </button>
-          </li>
-        </ul>
+            </div>
+            <span class="font-bold text-sm hidden sm:block mt-2">Cart</span>
+          </button>
+        </div>
       </div>
-    </nav>
+
+      <!-- Secondary Nav Tier -->
+      <div class="bg-gray-800 text-white flex items-center px-2 sm:px-4 py-1 gap-4 text-xs sm:text-sm font-medium overflow-x-auto whitespace-nowrap hide-scrollbar shadow-md">
+        <button class="flex items-center gap-1 border border-transparent hover:border-gray-500 p-1.5 rounded transition">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
+          All
+        </button>
+        <NuxtLink to="/products" class="border border-transparent hover:border-gray-500 p-1.5 rounded transition">Today's Deals</NuxtLink>
+        <NuxtLink to="/products" class="border border-transparent hover:border-gray-500 p-1.5 rounded transition">Mobiles</NuxtLink>
+        <NuxtLink to="/products" class="border border-transparent hover:border-gray-500 p-1.5 rounded transition">Electronics</NuxtLink>
+        <NuxtLink to="/products" class="border border-transparent hover:border-gray-500 p-1.5 rounded transition">Computers</NuxtLink>
+        <NuxtLink to="/products" class="border border-transparent hover:border-gray-500 p-1.5 rounded transition">Accessories</NuxtLink>
+        <NuxtLink to="/about" class="border border-transparent hover:border-gray-500 p-1.5 rounded transition">About Us</NuxtLink>
+        <NuxtLink to="/contact" class="hidden sm:block border border-transparent hover:border-gray-500 p-1.5 rounded transition">Customer Service</NuxtLink>
+      </div>
+
+      <!-- Mobile Search -->
+      <div class="sm:hidden bg-gray-900 px-2 pb-3 pt-1">
+        <div class="flex flex-grow rounded-md overflow-hidden bg-white focus-within:ring-2 focus-within:ring-[#f08804]">
+          <input type="text" placeholder="Search..." class="w-full px-3 py-2.5 text-black outline-none text-sm" />
+          <button class="bg-[#febd69] hover:bg-[#f3a847] px-4 text-gray-900 flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+          </button>
+        </div>
+      </div>
+    </header>
 
     <!-- Cart Sidebar Overlay -->
     <div v-if="isCartOpen" @click="isCartOpen = false" class="fixed inset-0 bg-black/50 z-[60] transition-opacity"></div>
@@ -227,3 +230,12 @@ onMounted(() => {
   }, 1000)
 })
 </script>
+<style>
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+</style>
