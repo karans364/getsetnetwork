@@ -15,7 +15,9 @@ export default defineNuxtConfig({
         { name: 'author', content: 'Get Set Network' }
       ],
       link: [
-        { rel: 'icon', type: 'image/png', href: '/images/fevicon.png' },
+        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+        { rel: 'icon', type: 'image/png', href: '/images/favicon.png' },
+        { rel: 'apple-touch-icon', href: '/images/favicon.png' },
         { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
         { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
         {
